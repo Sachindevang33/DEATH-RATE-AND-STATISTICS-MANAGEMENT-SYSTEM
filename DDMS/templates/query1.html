@@ -1,0 +1,57 @@
+{% extends 'queries.html' %}
+{% block title %}
+View All Diseases
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>All Deaths Causes by Infectious Diseases</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">AADHAR </th>
+      <th scope="col">NAME </th>
+      <th scope="col">DISEASE </th>
+
+      
+ 
+      
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+  
+    <tr>
+      <td scope="row">{{post.ssn}}</td>
+      <td scope="row">{{post.name}}</td>
+      <td scope="row">{{post.dname}}</td>
+
+
+      
+      
+      
+    </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+{% endblock body %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}
+Add New Disease
+{% endblock title %}
+<script>
+  function handleChange(input) {
+    if (input.value < 0) input.value = 0;
+    if (input.value > 100) input.value = 100;
+  }
+</script>
+
+
+{% block body %}
+ <h3 class="text-center bg-danger text-white"><span>Add New Disease</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<form action="/diseases" method="post">
+
+
+<div class="form-group">
+<label for="dname">Disease Name</label>
+<input type="text" placeholder="Enter Disease Name" class="form-control" name="dname" id="dname" required>
+</div>
+
+
+<br>
+<div class="form-group">  
+  <label for="classify">Class</label>                        
+<select  class="form-control" id="classify" name="classify"  required>
+        <option value="">Select Class</option>
+    
+        <option value="Infectious" >Infectious</option>
+        <option value="Non-Infectious" >Non-Infectious</option>
+       
+      </select>
+ </div>
+<br>
+<div class="form-group">  
+  <label for="cause">Cause</label>                        
+<select  class="form-control" id="cause" name="cause"  required>
+        <option value="">Select Cause</option>
+    
+        <option value="Virus" >Virus</option>
+        <option value="Bacteria" >Bacteria</option>
+        <option value="Worms" >Worms</option>
+        <option value="Protozoans" >Protozoans</option>
+        <option value="Fungi" >Fungi</option>
+        <option value="Notspecific" >Not Specific</option>
+        <option value="Hereditary" >Hereditary</option>
+        <option value="Unknown" >Unknown</option>
+       
+      </select>
+ </div>
+<br>
+<div class="form-group">
+
+  <label for="cagent">Causative Agent</label>
+  <input type="text" placeholder= "Enter Causative Agent" class="form-control" name="cagent" id="cagent" required>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label for="infections">Number of Infections</label>
+    <input type="text" class="form-control" name="infections" id="infections" placeholder= "Enter Number of Infections" pattern="[0-9]+" required>
+    </div>
+  <br>
+    
+    
+    <div class="form-group">
+      <label for="totaldeaths">Number of Deaths</label>
+      <input type="text" class="form-control" name="totaldeaths" id="totaldeaths" placeholder= "Enter Number of Deaths" pattern="[0-9]+" required>
+      </div>
+    <br>
+
+  <button type="submit" class="btn btn-danger btn-sm btn-block">Add New Disease</button>
+</form>
+<br>
+<br>
+
+</div>
+
+<div class="col-md-4"></div>
+
+</div></div>
+
+
+
+{% endblock body %}

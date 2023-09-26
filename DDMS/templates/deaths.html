@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}
+Add New Death
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Add Person Details</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<form action="/deaths" method="post">
+<div class="form-group">
+
+<label for="ssn">AADHAR</label>
+<input type="text" placeholder= "Enter aadhar" class="form-control" name="ssn" id="ssn" pattern="[0-9]{12}"  required>
+</div>
+<br>
+<div class="form-group">
+
+<label for="name">Person Name</label>
+<input type="text" placeholder= "Enter Name" class="form-control" name="name" id="name" required>
+</div>
+<br>
+<div class="form-group">
+
+<label for="age">Age</label>
+<input type="text" placeholder= "Enter Age in Numbers" class="form-control" name="age" id="age"  min = "0" max="125" pattern="[0-9]+" required>
+</div>
+<br>
+<div class="form-group">  
+  <label for="gender">Gender</label>                        
+<select  class="form-control" id="gender" name="gender"  required>
+        <option value="">Select Gender</option>
+    
+        <option value="male" >Male</option>
+        <option value="female" >Female</option>
+       
+      </select>
+ </div>
+<br>
+
+<div class="form-group">    
+  <label for="dname">Disease</label>                       
+<select class="form-control" id="dname" name="dname"  required>
+        <option value="">Select Disease</option>
+        {% for d in dname  %}
+        <option value="{{d.dname}}">{{d.dname}}</option>
+        {% endfor %}
+      </select>
+ </div>
+<br>
+<div class="form-group">
+
+<label for="email">Email</label>
+<input type="email" class="form-control" name="email" id="email" placeholder="Entert Email Address" required>
+</div>
+<br>
+<div class="form-group">
+<label for="num">Phone Number</label>
+<input type="text" class="form-control" name="num" id="num" placeholder= "Enter Ten Digit Phone Number" pattern="[0-9]{10}" required>
+</div>
+<br>
+
+<div class="form-group">
+<label for="address">City</label>
+<input type="text" placeholder= "Enter City" class="form-control" name="address" id="address" required>
+</div>
+<br>
+  
+<div class="form-group">
+  <label for="date">Date</label>
+  <input type="date" class="form-control" name="date" id="date" placeholder= "Enter Date of Death" required>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label for="time">Time</label>
+    <input type="time" class="form-control" name="time" id="time" placeholder= "Enter Time of Death"  required>
+    </div>
+    <br>
+  <button type="submit" class="btn btn-danger btn-sm btn-block">Add Record</button>
+</form>
+<br>
+<br>
+
+</div>
+
+<div class="col-md-4"></div>
+
+</div></div>
+
+
+
+{% endblock body %}

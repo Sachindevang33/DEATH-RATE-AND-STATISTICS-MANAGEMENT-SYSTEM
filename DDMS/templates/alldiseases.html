@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+View All Diseases
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>All Diseases</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">DISEASE ID</th>
+      <th scope="col">DISEASE NAME</th>
+      <th scope="col">CLASS </th>
+      <th scope="col">CAUSE</th>
+      <th scope="col">CAUSATIVE AGENT</th>
+      <th scope="col">EDIT</th>
+      <th scope="col">DELETE</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+      <th scope="row">{{post.did}}</th>
+      <td>{{post.dname}}</td>
+ 
+      <td>{{post.classify}}</td>
+      <td>{{post.cause}}</td>
+      <td>{{post.cagent}}</td>
+      <td><a href="/editdisease/{{post.did}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    <td><a href="/deletediseases/{{post.did}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+    </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+{% endblock body %}

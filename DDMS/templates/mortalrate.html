@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}
+Set Mortality Rate
+{% endblock title %}
+
+<script>
+  function handleChange(input) {
+    if (input.value < 0) input.value = 0;
+    if (input.value > 100) input.value = 100;
+  }
+</script>
+
+{% block body %}
+ <h3 class="text-center"><span>Set Mortality Rate to a Disease</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<form action="/addmortalrate" method="post">
+
+<div class="form-group">   
+  <label for="mortalrate">Select Disease</label>                       
+<select class="form-control" id="dname" name="dname"  required>
+        <option selected value="">None</option>
+        {% for r in query  %}
+        <option value="{{r.dname}}">{{r.dname}}</option>
+        {% endfor %}
+      </select>
+ </div>
+<br>
+
+<div class="form-group">
+<label for="mortalrate">Enter Mortality Rate</label>
+<input type="text" class="form-control" name="morrate" id="morrate" placeholder="Enter Mortality Rate between 0 to 100" pattern="[0-9]+" onchange="handleChange(this);" min="0" max="100" required>
+</div>
+<br>
+
+
+
+<div class="form-group">
+  <label for="totaldeaths">Number of Deaths</label>
+  <input type="text" class="form-control" name="totaldeaths" id="totaldeaths" placeholder= "Enter Number of Deaths" pattern="[0-9]+" required>
+  </div>
+<br>
+    
+
+  <button type="submit" class="btn btn-danger btn-sm btn-block">Add Mortality Rate</button>
+</form>
+<br>
+<br>
+
+</div>
+
+<div class="col-md-4"></div>
+
+</div></div>
+
+
+
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+Disease Mortality Rate
+{% endblock title %}
+
+
+
+{% block body %}
+ <h3 class="text-center"><span>Mortality Rate and Total Number of deaths</span> </h3>
+  
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<br>
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">DISEASE ID</th>
+     
+      <th scope="col">DISEASE NAME</th>
+      <th scope="col">MORTALITY RATE</th>
+      <th scope="col">TOTAL INFECTIONS</th>
+
+      <th scope="col">TOTAL DEATHS</th>
+      <th scope="col">EDIT</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+      <td scope="row">{{post.did}}</td>
+      <td scope="row">{{post.dname}}</td>
+      <td>{{post.mortalrate}}%</td>
+      <td>{{post.infections}}</td>
+
+      <td>{{post.totaldeaths}}</td>
+      <td><a href="/editmrate/{{post.mid}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+{% endblock body %}
